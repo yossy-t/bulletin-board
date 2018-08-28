@@ -1,8 +1,16 @@
 @extends('layouts.application')
 
+{{--
+  HaruReview
+  ここのtitleの指定の仕方良いと思います！いいね！
+  --}}
 @section('title', '新規作成')
 
 @section('content')
+  {{--
+  HaruReview
+  Formタグを使用する場合はLaravelCollectiveを使用しましょう。csrf_field()コマンドを使用しなくて良いですし、バリデーション等でリターンされた際に値が自動格納されるので便利です。
+  --}}
   <form action="/articles" method="post">
   {{ csrf_field() }}
   <div>

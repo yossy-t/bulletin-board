@@ -21,6 +21,11 @@ class LoginController extends Controller
             'oauth_callback' => config('twitter.callback_url')
         ));
 
+        /*
+         * haruReview
+         * sessionへの格納はcallback後じゃないとtwitterの返答関係なしに認証が通ることが気になっています。
+         * なにか理由があるのかもですが、可能であれば認証後にsessionにセットできるように工夫してみてください。
+         */
         # 認証画面で認証を行うためSessionに入れる
         session(array(
             'oauth_token' => $token['oauth_token'],
@@ -59,6 +64,10 @@ class LoginController extends Controller
             'oauth_token' => $request->oauth_token,
         ));
 
+        /*
+         * haruReview
+         * $twitter_userは使用していないなら削除しましょう。
+         */
         # access_tokenを用いればユーザー情報へアクセスできるため、それを用いてTwitterOAuthをinstance化
         $twitter_user = new TwitterOAuth(
             config('twitter.consumer_key'),
